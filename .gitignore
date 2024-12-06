@@ -1,0 +1,20 @@
+venv/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+*.sublime-workspace
+.atom/
+
+# Python specific
+*.pyc
+__pycache__/
+
+# macOS Finder metadata
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db

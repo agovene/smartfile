@@ -1,0 +1,9 @@
+bitarray==3.0.0
+filetype==1.2.0
+fpdf==1.7.2
+Pillow==9.5.0
+pycryptodome==3.21.0
+pypdf2==3.0.1
+python-dateutil==2.9.0.post0
+six==1.17.0
+typing-extensions==4.7.1
