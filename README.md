@@ -13,9 +13,9 @@ SmartFile is a simple Python package designed to help you manage and organize fi
 
 You can install the `smartfile` package via the GitHub repository:
 
-'''bash
+```bash
 pip install git+https://github.com/yourusername/smartfile.git
-'''
+```
 
 ## Usage
 
@@ -23,30 +23,30 @@ Here are some examples of how to use the core features of smartfile.
 
 ### Organize Files by Type
 
-'''python
+```python
 from smartfile import organize_by_type
-'''
+```
 
 #### Organize files in the specified directory by their MIME type.
 
-'''python
+```python
 organize_by_type('/path/to/directory')
-'''
+```
 
 This function will organize files in the given directory into subfolders based on their file types (e.g., image, text, audio).
 
 ### Bulk Rename Files
 
-'''python
+```python
 from smartfile import bulk_rename
-'''
+```
 
 #### Rename all files in a directory with a custom prefix.
 
-'''python
+```python
 new_names = bulk_rename('/path/to/directory', prefix='new_')
 print(new_names)  # List of renamed files
-'''
+```
 
 This function renames all files in the specified directory by adding a numeric prefix to each file.
 
@@ -54,50 +54,50 @@ This function renames all files in the specified directory by adding a numeric p
 
 Image Metadata (JPEG, PNG)
 
-'''python
+```python
 from smartfile import get_metadata
-'''
+```
 
 #### Get metadata for an image file.
 
-'''python
+```python
 metadata = get_metadata('/path/to/image.jpg')
 print(metadata)  # Example: {'format': 'JPEG', 'size': (1024, 768), 'mode': 'RGB'}
-'''
+```
 
 #### Get metadata for a PDF file.
 
-'''python
+```python
 metadata = get_metadata('/path/to/file.pdf')
 print(metadata)  # Example: {'author': 'John Doe', 'num_pages': 5}
-'''
+```
 
 ### Preview File Content
 
 Preview Text File
 
-'''python
+```python
 from smartfile import preview_text_file
-'''
+```
 #### Preview the first 5 lines of a text file.
 
-'''python
+```python
 preview = preview_text_file('/path/to/file.txt', num_lines=5)
 print(preview)
-'''
+```
 
 ### Preview Image File
 
-'''python
+```python
 from smartfile import preview_image_file
-'''
+```
 
 #### Preview an image file (thumbnail resized to 100x100).
 
-'''python
+```python
 preview_img = preview_image_file('/path/to/image.jpg')
 preview_img.show()
-'''
+```
 
 ## Contributing
 
