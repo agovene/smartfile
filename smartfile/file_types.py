@@ -1,16 +1,4 @@
-"""
-This module contains the function `get_file_type` that determines the MIME type of a file 
-based on its extension and/or content.
-
-Functions:
-- get_file_type: Returns the MIME type of a file by first checking its extension using mimetypes, 
-  and then inspecting its contents using the `filetype` library if necessary.
-
-Dependencies:
-- mimetypes: Used for guessing MIME types based on file extensions.
-- filetype: Used for binary inspection of files when mimetypes is insufficient.
-"""
-
+import os
 import mimetypes
 import filetype
 
@@ -29,11 +17,27 @@ def get_file_type(filepath):
     - str: The MIME type of the file (e.g., 'image/jpeg', 'text/plain'), or None if the type 
       cannot be determined.
 
+    Raises:
+    - TypeError: If the filepath is not a string, bytes, or os.PathLike object.
+    - FileNotFoundError: If the file does not exist.
+    - ValueError: If the filepath points to a directory instead of a file.
+
     Example:
     >>> get_file_type('/path/to/file.jpg')
     'image/jpeg'
     """
-    
+    # Validate input type
+    if not isinstance(filepath, (str, bytes, os.PathLike)):
+        raise TypeError(f"Invalid type for filepath: {type(filepath).__name__}")
+
+    # Check if the file exists
+    if not os.path.exists(filepath):
+        raise FileNotFoundError(f"The file '{filepath}' does not exist.")
+
+    # Check if the path is a directory
+    if os.path.isdir(filepath):
+        raise ValueError(f"The path '{filepath}' is a directory, not a file.")
+
     # Try using mimetypes to guess based on file extension
     mime_type, _ = mimetypes.guess_type(filepath)
     if mime_type:
@@ -43,6 +47,5 @@ def get_file_type(filepath):
     kind = filetype.guess(filepath)
     if kind:
         return kind.mime
-    
-    # Return None if the file type couldn't be determined
+
     return None
