@@ -28,21 +28,24 @@ class TestFileManagement(unittest.TestCase):
         """
         Test that files are organized correctly by type (e.g., images, text, pdfs, etc.).
         """
+        # Map files to their expected subfolders
+        expected_subfolders = {}
+        for file_name in self.files:
+            original_path = os.path.join(self.test_dir, file_name)
+            file_type = get_file_type(original_path)  # Get MIME type before moving
+            subfolder = file_type.split('/')[0] if file_type else 'unknown'
+            expected_subfolders[file_name] = os.path.join(self.test_dir, subfolder)
+
         # Run the organize_by_type function
         organize_by_type(self.test_dir)
-        
+
         # Check if the files have been moved to the correct subdirectories
-        for file_name in self.files:
-            file_path = os.path.join(self.test_dir, file_name)
-            file_type = get_file_type(file_path)  # Use get_file_type to get the MIME type
-            
-            # Subdirectory name should match the type (image, text, pdf, etc.)
-            subfolder = file_type.split('/')[0] if file_type else 'unknown'
-            subfolder_path = os.path.join(self.test_dir, subfolder)
-            
-            # Assert that the file is moved to the correct subfolder
-            self.assertTrue(os.path.exists(os.path.join(subfolder_path, file_name)), 
-                            f"{file_name} should be in the {subfolder} folder.")
+        for file_name, subfolder_path in expected_subfolders.items():
+            new_path = os.path.join(subfolder_path, file_name)
+            self.assertTrue(
+                os.path.exists(new_path),
+                f"{file_name} should be in the {subfolder_path} folder."
+            )
     
     def tearDown(self):
         """
